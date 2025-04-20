@@ -156,6 +156,10 @@ form{
     z-index: 2;
 }
 
+.toggle-panel.toggle-right{
+    right: -50%;
+}
+
 .toggle-panel p{
     margin-bottom: 20px;
 }
