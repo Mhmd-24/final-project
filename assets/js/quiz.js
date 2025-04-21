@@ -1,5 +1,9 @@
 const answerOptions = document.querySelector(".answer-options");
 const nextQuestionBtn = document.querySelector(".next-question-btn");
+const questionStatus = document.querySelector(".question-status");
+const numberOfQuestions = 5;
+
+
 let quizCategory = "programming";
 let currentQuestion = null;
 const questionsIndexHistory = [];
@@ -8,6 +12,10 @@ const getRandomQuestion = () => {
   const categoryQuestions = questions.find(cat => 
     cat.category.toLowerCase() === quizCategory.toLowerCase()
   )?.questions || [];
+
+  if(questionsIndexHistory.length >= Math.min(categoryQuestions.length, numberOfQuestions)){
+    return console.log("BYEBEYBYE");
+  }
 
   const availableQuestions = categoryQuestions.filter((_, index) => !questionsIndexHistory.includes(index));
 
@@ -52,6 +60,9 @@ const renderQuestion = () => {
     li.addEventListener("click", () => handleAnswer(li, index));
 
   nextQuestionBtn.style.visibility = "hidden";
+
+  questionStatus.innerHTML = `<b>${questionsIndexHistory.length}</b> of <b>${numberOfQuestions}</b> Questions`;
+
   });
 };
 
