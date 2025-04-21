@@ -5,6 +5,8 @@ const answerOptions = document.querySelector(".answer-options");
 const nextQuestionBtn = document.querySelector(".next-question-btn");
 const questionStatus = document.querySelector(".question-status");
 const timerDisplay = document.querySelector(".time-duration");
+const resultContainer = document.querySelector(".result-container");
+const quizContainer = document.querySelector(".quiz-container");
 const numberOfQuestions = 5;
 
 // =======================
@@ -16,6 +18,20 @@ let timer = null;
 let quizCategory = "programming";
 let currentQuestion = null;
 const questionsIndexHistory = [];
+let correctAnswerCount = 0;
+
+
+// =======================
+// 🔹 Result Function
+// =======================
+const showResult = () => {
+    // Display the result page and hide the quiz
+    quizContainer.style.display = "none";
+    resultContainer.style.display = "block";
+
+    const result = `You answered <b>${correctAnswerCount}</b> out of <b>${numberOfQuestions}</b> questions correctly!`;
+    document.querySelector(".result-message").innerHTML = result;
+}
 
 // =======================
 // 🔹 Reset Timer Function
@@ -55,7 +71,7 @@ const getRandomQuestion = () => {
 
     // Stop if we've reached the max number of questions
     if (questionsIndexHistory.length >= Math.min(categoryQuestions.length, numberOfQuestions)) {
-        return console.log("BYEBEYBYE");
+        return showResult();
     }
 
     // Filter out already asked questions
@@ -90,7 +106,7 @@ const handleAnswer = (option, answerIndex) => {
     const isCorrect = currentQuestion.correctAnswer === answerIndex;
     option.classList.add(isCorrect ? 'correct' : 'incorrect');
 
-    if (!isCorrect) highlightCorrectAnswer();
+    !isCorrect ? highlightCorrectAnswer() : correctAnswerCount++;
 
     const icon = `<i class='bx bx-x-circle'></i>`;
     option.insertAdjacentHTML("beforeend", icon);
@@ -138,6 +154,18 @@ const renderQuestion = () => {
     });
 };
 
+
+// =======================
+// 🔹 Reset Quiz by Reseting everything
+// =======================
+const resetQuiz = () => {
+    resetTimer();
+    correctAnswerCount = 0;
+    questionsIndexHistory.length = 0;
+    resultContainer.style.display = "none";
+    quizContainer.style.display = "block";
+}
+
 // =======================
 // 🔹 Start Quiz by Rendering First Question
 // =======================
@@ -147,3 +175,8 @@ renderQuestion();
 // 🔹 Handle "Next Question" Click
 // =======================
 nextQuestionBtn.addEventListener("click", renderQuestion);
+
+// =======================
+// 🔹 Reset Quiz by clicking try again button
+// =======================
+document.querySelector(".try-again-btn").addEventListener("click", resetQuiz);
