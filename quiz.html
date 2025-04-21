@@ -4,35 +4,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="home.css">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="./assets/css/quiz.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
-    <section id="config-container">
-        <h2>Quiz Configuration</h2>
-        <section id="quiz-config" class="config">
-            <h3>Select a quiz!</h2>
-                <section id="quiz-categories">
-                    <button class="category">Programming</button>
-                    <button class="category">Mathematics</button>
-                    <button class="category">Movies</button>
-                    <button class="category">History</button>
+    <section class="config-container">
+        <h2 class="config-title">Quiz Configuration</h2>
+        <section class="config-option">
+            <h3 class="option-title">Select a quiz!</h2>
+                <section class="category-options">
+                    <button class="category-option">Programming</button>
+                    <button class="category-option">Mathematics</button>
+                    <button class="category-option">Movies</button>
+                    <button class="category-option">History</button>
                 </section>
         </section>
 
-        <section id="question-config" class="config">
-            <h3>Number of questions?</h2>
-                <section id="questions-number">
-                    <button class="option">5</button>
-                    <button class="option">10</button>
-                    <button class="option">15</button>
-                    <button class="option">20</button>
-                    <button class="option">20</button>
+        <section class="config-option">
+            <h3 class="option-title">Number of questions?</h2>
+                <section class="question-options">
+                    <button class="question-option">5</button>
+                    <button class="question-option">10</button>
+                    <button class="question-option">15</button>
+                    <button class="question-option">20</button>
+                    <button class="question-option">20</button>
                 </section>
         </section>
-        <button id="quiz-btn" class="btn">Start Quiz</button>
+        <button class="start-quiz-btn">Start Quiz</button>
     </section>
+
+    <section class="quiz-container">
+        <header class="quiz-header">
+            <h2 class="quiz-title">Quiz Website</h2>
+            <div class="quiz-timer">
+                <i class='bx bx-timer'></i>
+                <p class="time-duration">15s</p>
+            </div>
+        </header>
+
+        <div class="quiz-content">
+            <h1 class="question-text"></h1>
+            <ul class="answer-options"></ul>
+        </div>
+
+        <div class="quiz-footer">
+            <p class="question-status"><b>2</b> of <b>10</b> Questions</p>
+            <button class="next-question-btn">
+                Next <i class='bx bx-right-arrow-alt'></i>
+            </button>
+        </div>
+    </section>
+
+    <section class="result-container">
+        <img src="./assets/images/quiz-over.png" alt="Quiz Over" class="result-img">
+        <h2 class="result-title">Quiz Completed</h2>
+        <p class="result-message">You answeres <b>3</b> out of <b>5</b> questions correctly!</p>
+        <button class="try-again-btn">Try again</button>
+    </section>
+
+    <script src="./assets/js/quiz.js"></script>
 </body>
 
 </html>

@@ -42,19 +42,24 @@ nav{
     border: 2px solid #516AAD;
     box-shadow: 0 0 5px #516AAD;
     width: 750px;
-    height: fit-content;
+    height: 300px;
     border-radius: 15px;
 }
 
-#hero-sec h1{
+#hero-container h1{
     margin: 10px 0 50px;
     color: #516AAD;
     font-size: 48px;
 }
 
-.btn{
+#hero-container {
+    margin-bottom: 20px;
+}
+
+#hero-container .btn{
+    display: inline-block;
     margin-top: 20px;
-    border: none;
+    border: 2px solid #516AAD;
     outline: none;
     color: #fff;
     background: #516AAD;
@@ -63,5 +68,12 @@ nav{
     font-size: 17px;
     font-weight: 500;
     cursor: pointer;
+    transition: .5s ease-in-out;
+}
+
+#hero-container .btn:hover{
+    color: #516AAD;
+    background: #fff;
+    border: 2px solid #516AAD;
 }
 
