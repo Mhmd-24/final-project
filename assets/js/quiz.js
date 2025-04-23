@@ -1,13 +1,13 @@
 // =======================
 // 🔹 DOM Elements
 // =======================
+const configContainer = document.querySelector(".config-container");
 const answerOptions = document.querySelector(".answer-options");
 const nextQuestionBtn = document.querySelector(".next-question-btn");
 const questionStatus = document.querySelector(".question-status");
 const timerDisplay = document.querySelector(".time-duration");
 const resultContainer = document.querySelector(".result-container");
 const quizContainer = document.querySelector(".quiz-container");
-const numberOfQuestions = 5;
 
 // =======================
 // 🔹 Quiz State Variables
@@ -15,11 +15,11 @@ const numberOfQuestions = 5;
 const time_limit = 15;
 let currentTime = time_limit;
 let timer = null;
-let quizCategory = "programming";
 let currentQuestion = null;
 const questionsIndexHistory = [];
 let correctAnswerCount = 0;
-
+let quizCategory = "programming";
+let numberOfQuestions = 5;
 
 // =======================
 // 🔹 Result Function
@@ -55,6 +55,9 @@ const startTimer = () => {
             highlightCorrectAnswer();
             // Show Next button
             nextQuestionBtn.style.visibility = "visible";
+
+            quizContainer.querySelector(".quiz-timer").style.background = "#d40404";
+
             // Disable further clicks
             answerOptions.querySelectorAll(".answer-option").forEach(option => option.style.pointerEvents = "none");
         }
@@ -103,13 +106,21 @@ const highlightCorrectAnswer = () => {
 // 🔹 Handle Answer Selection
 // =======================
 const handleAnswer = (option, answerIndex) => {
+
+    if (option.classList.contains('correct') || option.classList.contains('incorrect')) return;
+
     const isCorrect = currentQuestion.correctAnswer === answerIndex;
     option.classList.add(isCorrect ? 'correct' : 'incorrect');
 
     !isCorrect ? highlightCorrectAnswer() : correctAnswerCount++;
 
-    const icon = `<i class='bx bx-x-circle'></i>`;
-    option.insertAdjacentHTML("beforeend", icon);
+    if (!isCorrect) {
+        const icon = `<i class='bx bx-x-circle'></i>`;
+        option.insertAdjacentHTML("beforeend", icon);
+    }else{
+        const icon = `<i class='bx bx-check-circle'></i>`;
+        option.insertAdjacentHTML("beforeend", icon);
+    }
 
     // Disable further clicks
     answerOptions.querySelectorAll(".answer-option").forEach(option => option.style.pointerEvents = "none");
@@ -134,6 +145,8 @@ const renderQuestion = () => {
     // Hide next button for now
     nextQuestionBtn.style.visibility = "hidden";
 
+    quizContainer.querySelector(".quiz-timer").style.background = "#32313C";
+
     // Update question number status
     questionStatus.innerHTML = `<b>${questionsIndexHistory.length}</b> of <b>${numberOfQuestions}</b> Questions`;
 
@@ -156,6 +169,33 @@ const renderQuestion = () => {
 
 
 // =======================
+// 🔹 Start Quiz by Rendering questions
+// =======================
+const startQuiz = () => {
+    configContainer.style.display = "none";
+    quizContainer.style.display = "block";
+
+    // Update quiz category and number of questions
+    quizCategory = configContainer.querySelector(".category-option.active").textContent;
+    numberOfQuestions = parseInt(configContainer.querySelector(".question-option.active").textContent);
+
+    renderQuestion();
+}
+
+// =======================
+// 🔹 Highlight (Category / No. of questions) on click
+// =======================
+document.querySelectorAll(".category-option, .question-option").forEach(option => {
+    option.addEventListener("click", () => {
+        const currentActive = option.parentNode.querySelector(".active");
+        if (currentActive){
+            currentActive.classList.remove("active");
+        }
+        option.classList.add("active");
+    });
+});
+
+// =======================
 // 🔹 Reset Quiz by Reseting everything
 // =======================
 const resetQuiz = () => {
@@ -163,13 +203,8 @@ const resetQuiz = () => {
     correctAnswerCount = 0;
     questionsIndexHistory.length = 0;
     resultContainer.style.display = "none";
-    quizContainer.style.display = "block";
+    configContainer.style.display = "block";
 }
-
-// =======================
-// 🔹 Start Quiz by Rendering First Question
-// =======================
-renderQuestion();
 
 // =======================
 // 🔹 Handle "Next Question" Click
@@ -180,3 +215,8 @@ nextQuestionBtn.addEventListener("click", renderQuestion);
 // 🔹 Reset Quiz by clicking try again button
 // =======================
 document.querySelector(".try-again-btn").addEventListener("click", resetQuiz);
+
+// =======================
+// 🔹Start Quiz by clicking try again button
+// =======================
+document.querySelector(".start-quiz-btn").addEventListener("click", startQuiz);
