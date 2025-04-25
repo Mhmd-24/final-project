@@ -25,6 +25,9 @@ let numberOfQuestions = 5;
 // 🔹 Result Function
 // =======================
 const showResult = () => {
+
+    saveQuizResult();
+
     // Display the result page and hide the quiz
     quizContainer.style.display = "none";
     resultContainer.style.display = "block";
@@ -194,6 +197,31 @@ document.querySelectorAll(".category-option, .question-option").forEach(option =
         option.classList.add("active");
     });
 });
+
+const saveQuizResult = () => {
+  const currentUser = localStorage.getItem("loggedInUser");
+  if (!currentUser) return;
+
+  const date = new Date();
+  const formattedDate = String(date.getDate()).padStart(2, '0') + '/' +
+    String(date.getMonth() + 1).padStart(2, '0') + '/' +
+    date.getFullYear() + ' @ ' +
+    String(date.getHours()).padStart(2, '0') + ':' +
+    String(date.getMinutes()).padStart(2, '0');
+
+  const result = {
+    username: currentUser,
+    category: quizCategory,
+    score: correctAnswerCount,
+    totalQuestions: numberOfQuestions,
+    date: formattedDate
+  };
+
+  let quizHistory = JSON.parse(localStorage.getItem("quizHistory")) || [];
+  quizHistory.push(result);
+  localStorage.setItem("quizHistory", JSON.stringify(quizHistory));
+  console.log(currentUser);
+}
 
 // =======================
 // 🔹 Reset Quiz by Reseting everything

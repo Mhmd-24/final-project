@@ -1,4 +1,4 @@
-function register(){
+const register = () => {
 
     const name = document.getElementById('register-username');
     const mail = document.getElementById('register-email');
@@ -24,7 +24,7 @@ function register(){
     }
 }
 
-function login(){
+const login = () => {
 
     const name = document.getElementById('login-username');
     const pass = document.getElementById('login-password');
@@ -39,6 +39,8 @@ function login(){
 
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const validUser = users.find(user => (user.username === username || user.email === username) && user.password === password);
+
+    localStorage.setItem("loggedInUser", username);
 
     if (validUser) {
         name.value = '';

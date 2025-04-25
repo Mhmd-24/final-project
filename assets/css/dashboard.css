@@ -5,6 +5,120 @@
     font-family: 'Poppins', sans-serif;
 }
 
-body {
-    min-height: 100vh;
-    background: linear-gradient(90deg, #2A7B9B 0%, #516AAD 50%, #7494EB 100%);}
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    gap: 25px;
+    padding: 15px 25px;
+    background: linear-gradient(90deg, #2A7B9B 0%, #516AAD 50%, #7494EB 100%);
+}
+
+#logo {
+    font-size: 48px;
+    margin-left: 25px;
+}
+
+nav {
+    margin-left: 50px;
+}
+
+#title{
+    padding: 25px 10px;
+}
+
+#title h1{
+    font-size: 36px;
+}
+
+#title hr{
+    width: 300px;
+    margin: 5px 0px;
+    border: 1px solid black;
+}
+
+#filters{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 25px;
+    gap: 15px;
+}
+
+#filter-username{
+    border: none;
+    outline: none;
+    padding: 13px 50px 13px 20px;
+    background: #eee;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+}
+
+#filter-username::placeholder{
+    color: #888;
+    font-weight: 400;
+}
+
+#filters button, #filter-category, #sort-by{
+    background: #7494ec;
+    border-radius: 8px;
+    padding: 10px 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    border: 2px solid #7494ec;
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+    transition: .5s ease;
+}
+
+#sort-by{
+    background: #fff;
+    color: #7494ec;
+    width: 150px;
+}
+
+#filters button:hover{
+    background: #fff;
+    color: #7494ec;
+}
+
+#results{
+    padding: 25px;
+}
+
+table{
+    border: 2px solid #7494ec;
+    border-collapse: collapse;
+    width: 768px;
+}
+
+th,
+td {
+    border: 2px solid #7494ec;
+    background-color: #eef0f7;
+    padding: 10px;
+}
+
+#table-username{
+    width: 33%;
+}
+
+#table-category{
+    width: 25%;
+}
+
+#table-score{
+    width: 12%;
+}
+
+#table-date{
+    width: 30%;
+}

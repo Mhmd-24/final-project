@@ -7,6 +7,55 @@
     <link rel="stylesheet" href="./assets/css/dashboard.css">
 </head>
 <body>
-    <h1>Dashboard</h1>
+
+    <header>
+        <a href="#" id="logo">Quiz.io</a>
+        <nav><a href="quiz.html" class="nav-link">Start a quiz!!!</a></nav>
+    </header>
+
+    <section id="title">
+        <h1>Dashboard</h1>
+        <hr>
+    </section>
+
+    <section id="filters">
+
+        <input type="text" id="filter-username" placeholder="Username">
+
+        <select id="filter-category">
+            <option value="">All Categories</option>
+            <option value="Programming">Programming</option>
+            <option value="Geography">Geography</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Entertainment">Entertainment</option>
+        </select>
+
+        <select id="sort-by">
+            <option value="">Sort By</option>
+            <option value="date-desc">Date (Newest)</option>
+            <option value="date-asc">Date (Oldest)</option>
+            <option value="score-desc">Score (High to Low)</option>
+            <option value="score-asc">Score (Low to High)</option>
+        </select>
+
+        <button onclick="applyFilters()">Apply Filters</button>
+
+    </section>
+
+    <section id="results">
+        <table id="results-table">
+            <thead>
+                <tr>
+                    <th id="table-username">Username</th>
+                    <th id="table-category">Category</th>
+                    <th id="table-score">Score</th>
+                    <th id="table-date">Date</th>
+                </tr>
+            </thead>
+            <tbody id="quiz-results-table"></tbody>
+        </table>
+    </section>
+
+<script src="./assets/js/dashboard.js"></script>
 </body>
 </html>
